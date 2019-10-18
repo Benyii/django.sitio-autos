@@ -1,0 +1,11 @@
+Integrantes:
+	- Benjamín Aceituno
+	- Nicolás Riquelme
+	- Cristobal Celis
+
+Nombre entorno virtual: django_ambiente_virtual
+
+Datos Usuario 'admin':
+	Username: admin
+	Password: admin123
+
