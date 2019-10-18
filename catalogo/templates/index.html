@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Legendary Motorsport</title>
+
+  <!-- Bootstrap core CSS -->
+  {% load static %}
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  {% load static %}
+  <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+
+  <!-- Favicon-->
+  {% load static %}
+  <link rel="shortcut icon" type="images/png" href="{% static 'favicon.png' %}"/>
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+      {% load static %}  
+      <img src="{% static 'images/logo.png' %}" alt=""></a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        {% block sidebar %}
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'index' %}">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'blog' %}">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'about' %}">Sobre nosotros</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'contact' %}">Contacto</a>
+          </li>
+        </ul>
+        {% endblock %}
+      </div>
+    </div>
+  </nav>
+
+  <header>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner" role="listbox">
+        <!-- Slide One -->
+        {% load static %}
+        <div class="carousel-item active" style="background-image: url('{% static 'images/slide_1.png' %}')">
+          <div class="carousel-caption d-none d-md-block">
+            <h3 class="tamaño1">Jester Classic</h3>
+            <p class="tamaño2">El vehiculo ideal para las personas retro</p>
+          </div>
+        </div>
+        <!-- Slide Two -->
+        {% load static %}
+        <div class="carousel-item" style="background-image: url('{% static 'images/slide_2.png' %}')">
+          <div class="carousel-caption d-none d-md-block">
+            <h3 class="tamaño1">T20</h3>
+            <p class="tamaño2">¿Velocidad y Manejo son tus intereses? Revisa este vehiculo ideal para tí</p>
+          </div>
+        </div>
+        <!-- Slide Three  -->
+        {% load static %}
+        <div class="carousel-item" style="background-image: url('{% static 'images/slide_3.png' %}')">
+          <div class="carousel-caption d-none d-md-block">
+            <h3 class="tamaño1">Turismo R</h3>
+            <p class="tamaño2">¿Eres de los que eligen lo lujoso? Conoce esta belleza ;)</p>
+          </div>
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Page Content -->
+  <div class="container">
+    <br><br>
+    <!-- Features Section -->
+    <div class="row">
+      <div class="col-lg-6">
+        <h2>Legendary Motorsport</h2>
+        <p>¿Estas buscando un vehiculo nuevo? Ofrecemos descuentos en compras</p>
+        <p>Requisitos:</p>
+        <ul>
+          <li>
+            <strong>Estar registrado en el blog</strong>
+          </li>
+          <li>Seguirnos en Lifeinvader</li>
+          <li>Poseer una cuenta verificada</li>
+        </ul>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, omnis doloremque non cum id reprehenderit, quisquam totam aspernatur tempora minima unde aliquid ea culpa sunt. Reiciendis quia dolorum ducimus unde.</p>
+      </div>
+      <div class="col-lg-6">
+        {% load static %}
+        <img class="img-fluid rounded" src="{% static 'images/discount.png' %}" alt="">
+      </div>
+    </div>
+  </div>
+  <br><br>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white"> &copy; Legendary Motorsport - Todos los derechos reservados</p>
+        <p class="m-0 text-center text-white">Contacto: +569123456789</p>
+        <p class="m-0 text-center text-white">Email: <a href="mailto:legendary.motor20@gmail.com">legendary.motor20@gmail.com</a></p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  {% load static %}
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  {% load static %}
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+
+</html>
