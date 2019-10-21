@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import Auto
+from .forms import AutoForm
+
 
 # Create your views here.
 def index(request):
@@ -19,6 +21,17 @@ def index(request):
         'index.html',
         #context={'num_books':num_books,'num_instances':num_instances,'num_instances_available':num_instances_available,'num_authors':num_authors},
     )
+
+def crearPost(request):
+    if request.method == 'POST':
+        form = AutoForm((request.POST,request.FILES) or None)
+        if form.is_valid():
+            form.save()
+            return redirect('blog')
+    else:
+        form = AutoForm()
+    return render(request,'addpost.html',{"form":form})
+
 	
 def blog(request):
 

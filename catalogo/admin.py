@@ -2,6 +2,8 @@ from django.contrib import admin
 
 # Register your models here.
 
-from . models import Auto
+from . models import *
 
 admin.site.register(Auto)
+admin.site.register(Post)
+
