@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+{% block content %}
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Eliminar Post - Legendary Motorsport</title>
+
+  <!-- Bootstrap core CSS Cargar boostrap-->
+  {% load static %}
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <!-- Custom styles for this template Cargar css-->
+  {% load static %}
+  <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+
+  <!-- Favicon Cargar iconos-->
+  {% load static %}
+  <link rel="shortcut icon" type="images/png" href="{% static 'favicon.png' %}"/>
+
+</head>
+
+<body>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="col d-flex justify-content-center">
+      <!-- Blog Entries Column -->
+        <!-- Search Widget -->
+        <div class="card">
+            <h5 class="card-header">Eliminar post</h5>
+            <div class="card-body">
+              <form method="POST">
+                {% csrf_token %}
+                ¿Estás seguro que deseas eliminar el post del vehiculo {{ auto.nombre }}?
+                <br><br>
+                <button type="submit" name='submit_button' class="btn btn-primary center">Eliminar</button>
+              </form>
+            </div>
+        </div>
+    </div>
+  </div>
+  <!-- Bootstrap core JavaScript -->
+  {% load static %}
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  {% load static %}
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+{% endblock content %}
+</html>
