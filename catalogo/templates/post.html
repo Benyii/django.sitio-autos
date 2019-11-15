@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+{% block content %}
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Osiris - Legendary Motorsport</title>
+
+  <!-- Bootstrap core CSS Cargar boostrap-->
+  {% load static %}
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <!-- Custom styles for this template Cargar css-->
+  {% load static %}
+  <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+
+  <!-- Favicon Cargar iconos-->
+  {% load static %}
+  <link rel="shortcut icon" type="images/png" href="{% static 'favicon.png' %}"/>
+</head>
+
+<body>
+
+ <!-- Navigation -->
+ <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+      {% load static %}  
+      <img src="{% static 'images/logo.png' %}" alt=""></a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        {% block sidebar %}
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'index' %}">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'blog' %}">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'about' %}">Sobre nosotros</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'contact' %}">Contacto</a>
+          </li>
+        </ul>
+        {% endblock %}
+      </div>
+    </div>
+  </nav>
+
+  <!-- Contenido de la pagina-->
+  <div class="container">
+    {% csrf_token %}
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">{{ auto.nombre }}
+      <small>by
+        <a href="#">admin</a>
+      </small>
+    </h1>
+
+    <div class="row">
+
+      <!-- Post Content Column -->
+      <div class="col-lg-8">
+
+        <!-- Preview Image -->
+        {% load static %}
+        <img class="img-fluid rounded" src="/catalogo/media/{{ auto.imagen }}" alt="">
+
+        <hr>
+
+        <!-- Date/Time -->
+        <p>Posteado el {{ auto.creado_en }}</p>
+
+        <hr>
+
+        <!-- Post Content -->
+        <p class="lead">{{ auto.descripcion }}</p>
+
+        <p> {{ auto.resena }}</p>
+
+        <p> <b>Modelo :</b> {{ auto.modelo }}</p>
+
+        <p> <b>Marca :</b> {{ auto.marca }}</p>
+
+        <p> <b>Capacidad de pasajeros (cabina) :</b> {{ auto.cabina }}</p>
+
+        <hr>
+
+        <p>Compralo en Legendarymotorsport.net, por ${{ auto.valor }} y obten un 10% de descuento</p>
+
+        <hr>
+
+        <!-- Comments Form 
+        <div class="card my-4">
+          <h5 class="card-header">Deja un comentario: </h5>
+          <div class="card-body">
+            <form>
+              <div class="form-group">
+                <textarea class="form-control" rows="3"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+          </div>
+        </div>
+
+  
+        <div class="media mb-4">
+          
+          <div class="media-body">
+            <div class="media mt-4">
+              <img class="d-flex mr-3 rounded-circle" src="img/avatar.png" alt="">
+              <div class="media-body">
+                <h5 class="mt-0">dark2005:</h5>
+                Un auto hermoso, veloz, pero un poco dificil de controlar en sectores urbanos.
+              </div>
+            </div>
+
+            <div class="media mt-4">
+              <img class="d-flex mr-3 rounded-circle" src="img/avatar.png" alt="">
+              <div class="media-body">
+                <h5 class="mt-0">emmanuel20:</h5>
+                Uno de los mejores autos por lejos vale la pena gastar un buena suma de dinero para obtenerlo.
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>-->
+      </div>
+    </div>
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer pie del sitio-->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white"> &copy; Legendary Motorsport - Todos los derechos reservados</p>
+        <p class="m-0 text-center text-white">Contacto: +569123456789</p>
+        <p class="m-0 text-center text-white">Email: <a href="mailto:legendary.motor20@gmail.com">legendary.motor20@gmail.com</a></p>
+    </div>
+    <!-- /. Termino del container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+{% endblock content %}
+</html>

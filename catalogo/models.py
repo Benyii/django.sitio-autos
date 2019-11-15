@@ -3,10 +3,12 @@ from django.urls import reverse # Used to generate URLs by reversing the URL pat
 from django.db.models import IntegerField, Model
 from django.core.validators import MaxValueValidator, MinValueValidator
 import uuid # Required for unique book instances
+import datetime
 
 class Auto(models.Model):
 
-	nombre = models.CharField(max_length=200, default='Nombre vehiculo')
+	id = models.IntegerField(primary_key=True)
+	nombre = models.CharField(max_length=200)
 	cabina = models.IntegerField(
 		default='1',
 		help_text='Cantidad de asientos',
@@ -15,19 +17,27 @@ class Auto(models.Model):
             MinValueValidator(1)
         ]
 	)
-	modelo = models.CharField(max_length=50, default='Modelo vehiculo')
-	marca = models.CharField(max_length=50, default='Marca vehiculo')
-	imagen = models.FileField(upload_to='catalogo/static/images/blog/', null=True)
+	modelo = models.CharField(max_length=50)
+	marca = models.CharField(max_length=50)
+	imagen = models.ImageField(null=True)
+	descripcion = models.TextField(max_length=1000, null=True, default='Vacio', help_text='Una breve descripcion')
+	resena = models.TextField(max_length=1000, null=True, help_text='Explayate al describir sobre el vehiculo')
+	valor = models.IntegerField(
+		default='1',
+		help_text='Valor del vehiculo en USD',
+		validators=[
+            MinValueValidator(1),
+        ]
+	)
+	creado_en = models.DateTimeField(auto_now_add=True)
+	modificado_el = models.DateTimeField(auto_now=True)
 	
 	def __str__(self):
 		return self.nombre
 
-class Post(models.Model):
 
-  	title = models.CharField(max_length=250)
-  	body = models.TextField()
-  	created_at = models.DateTimeField(auto_now_add=True)
-  	updated_at = models.DateTimeField(auto_now=True)
+
+
 
  
 		
