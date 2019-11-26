@@ -1,6 +1,7 @@
 from django import forms
 
 from .models import Auto
+from .models import Comentario
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 import copy
@@ -89,3 +90,12 @@ class AutoEditForm(forms.ModelForm):
 			'resena': forms.Textarea(attrs={'class': 'form-control', 'size': 100, 'type':'textarea'}),
 			'valor': forms.TextInput(attrs={'class': 'form-control col-12 justify-content-center','type':'number'}),
 		}
+
+class ComentarioForm(forms.ModelForm):
+
+	class Meta:
+		model = Comentario
+
+		fields = [ 'comentario' ]
+		labels = { 'comentario' : 'Comentario'}
+		widgets = { 'comentario' : forms.Textarea(attrs={'class': 'form-control', 'size': 30, 'type':'textarea'}),}

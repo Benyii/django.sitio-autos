@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Editar Post - Legendary Motorsport</title>
+  <title>Login - Legendary Motorsport</title>
 
   <!-- Bootstrap core CSS Cargar boostrap -->
   {% load static %}
@@ -65,20 +65,51 @@
     </nav>
 
   <!-- Contenido de la pagina -->
-  {% if user.is_staff %}
   <div class="container">
-      <h1 class="mt-4 mb-3">Editar Post</h1>
-      <div class="row">
-        <div class="col-lg-8 mb-4">
-          <h3>Modifica los datos para editar un post</h3>
-          <form enctype="multipart/form-data" action="" method="POST">
-              {% csrf_token %}
-              {{ form.as_p }}
-            <button type="submit" name='submit_button' class="btn btn-primary">Enviar mensaje</button>
+
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3 text-center">Iniciar sesión</h1>
+    <hr>
+    <h4 class="text-center">Bienvenido/a al blog de Legendary Motorsport!</h4>
+    <h6 class="text-center">Recuerda que al ingresar por nuestro blog puedes obtener descuentos asombrosos en vehiculos</h6>
+    <br>
+
+    <div class="col d-flex justify-content-center">
+      <div>
+        <div class="card">
+          <div class="card-body">
+          <form method="POST" action="{% url 'login' %}">
+          {% csrf_token %}
+
+          <div>
+            <td>{{ form.username.label_tag }}</td>
+            <td>{{ form.username }}</td>
+          </div>
+          <div>
+            <td>{{ form.password.label_tag }}</td>
+            <td>{{ form.password }}</td>
+          </div>
+
+          <div class="text-center">
+            <input class="btn btn-primary" type="submit" value="Ingresar" />
+            <input class="btn btn-primary" type="hidden" name="next" value="{{ next }}" />
+          </div>
           </form>
         </div>
+        </div>
+        {% if form.errors %}
+        <div class='alert alert-danger'>
+            <button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>
+            <strong>Usuario y/o Contraseña incorrecta</strong>
+        </div>
+        {% endif %}
       </div>
+    </div> 
+    <!-- /.row -->
+<br><br>
   </div>
+  <!-- /. Termino container -->
+
   <!-- Footer Pie del sitio -->
   <footer class="py-5 bg-dark">
     <div class="container">
@@ -88,15 +119,6 @@
     </div>
     <!-- /. Termino de container -->
   </footer>
-  {% else %}
-  <br>
-  <title>Error - Legendary Motorsport</title>
-  <div class='alert alert-danger'>
-      <button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>
-      <strong><h2 class="text-center" style="font-size: 60px;">Error - No tienes acceso a esta página</h2></strong>
-        <p class="m-0 text-center" style="font-size: 20px;">Este post solo puede ser editado por un administrador.</p>
-  </div>
-  {% endif %}
 
   <!-- Bootstrap core JavaScript -->
   {% load static %}

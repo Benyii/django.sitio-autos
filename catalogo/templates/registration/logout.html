@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Eliminar Post - Legendary Motorsport</title>
+  <title>Logout - Legendary Motorsport</title>
 
   <!-- Bootstrap core CSS Cargar boostrap-->
   {% load static %}
@@ -27,34 +27,20 @@
 <body>
 
   <!-- Page Content -->
-  {% if user.is_staff %}
   <div class="container">
 
     <div class="col d-flex justify-content-center">
       <!-- Blog Entries Column -->
         <!-- Search Widget -->
         <div class="card">
-            <h5 class="card-header">Eliminar post</h5>
+            <h5 class="card-header text-center">Sesión Cerrada</h5>
             <div class="card-body">
-              <form method="POST">
-                {% csrf_token %}
-                ¿Estás seguro que deseas eliminar el post del vehiculo {{ auto.nombre }}?
-                <br><br>
-                <button type="submit" name='submit_button' class="btn btn-primary center">Eliminar</button>
-              </form>
+              <p>Sesión finalizada con exito</p>            
+              <a href="login">Click para ser redireccionado al inicio</a>
             </div>
         </div>
     </div>
   </div>
-  {% else %}
-  <br>
-  <title>Error - Legendary Motorsport</title>
-  <div class='alert alert-danger'>
-      <button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>
-      <strong><h2 class="text-center" style="font-size: 60px;">Error - No tienes acceso a esta página</h2></strong>
-        <p class="m-0 text-center" style="font-size: 20px;">Este post solo puede ser editado por un administrador.</p>
-  </div>
-  {% endif %}
   <!-- Bootstrap core JavaScript -->
   {% load static %}
   <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>

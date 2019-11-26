@@ -1,28 +1,20 @@
 from django.shortcuts import render, redirect
 from django.http import Http404
-from .models import Auto
-from .forms import AutoForm, AutoEditForm
+from .models import Auto, Comentario
+from .forms import AutoForm, AutoEditForm, ComentarioForm
 from django.template import RequestContext
 import datetime
 
 
 # Create your views here.
 def index(request):
-    """
-    Función vista para la página inicio del sitio.
-    """
-    # Genera contadores de algunos de los objetos principales
-    #num_books=Book.objects.all().count()
-    #num_instances=BookInstance.objects.all().count()
-    # Libros disponibles (status = 'a')
-    #num_instances_available=BookInstance.objects.filter(status__exact='a').count()
-    #num_authors=Author.objects.count()  # El 'all()' esta implícito por defecto.
-    
+    num_visits=request.session.get('num_visits', 0)   
+    num_visits=request.session['num_visits']=num_visits+1 
     # Renderiza la plantilla HTML index.html con los datos en la variable contexto
     return render(
         request,
         'index.html',
-        #context={'num_books':num_books,'num_instances':num_instances,'num_instances_available':num_instances_available,'num_authors':num_authors},
+        context={'num_visits':num_visits},
     )
 
 def crearPost(request):
@@ -64,11 +56,21 @@ def borrarPost(request, num):
 
 def verMas(request, num):
     a = Auto.objects.get(pk=int(num))
-    return render(request, 'post.html', {'auto': a})
+    comentarios = Comentario.objects.all()
+    formulario = ComentarioForm(request.POST)
+
+    if request.method == 'POST':
+        if formulario.is_valid(): 
+            formulario.save()
+    else:
+        formulario = ComentarioForm()
+        
+    return render(request, 'post.html', {'auto': a}, {'form': formulario})
 
 def blog(request):
     autos = Auto.objects.all()
-    return render(request,'blog.html', {'autos': autos})
+    cantidad = Auto.objects.count()
+    return render(request,'blog.html', {'autos': autos}, {'cantidad': cantidad})
 	
 def about(request):
 
@@ -83,6 +85,13 @@ def contact(request):
         request,
         'contact.html',
     )	
+
+def logout(request):
+
+    return render(
+        request,
+        'registration/logout.html',
+    )
 
 	
 	

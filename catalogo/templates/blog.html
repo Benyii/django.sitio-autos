@@ -8,8 +8,6 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Blog - Legendary Motorsport</title>
-
   <!-- Bootstrap core CSS Cargar boostrap-->
   {% load static %}
   <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -50,6 +48,13 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'contact' %}">Contacto</a>
             </li>
+            <li class="nav-item">
+                {% if user.is_authenticated  %}
+                  <a class="nav-link text-white" href="{% url 'logout' %}">Cerrar sesión - {{ user.get_username }}</a>
+                {% else %}
+                  <a class="nav-link text-white" href="{% url 'login' %}">Iniciar sesión</a>
+                {% endif %}
+            </li>
           </ul>
           {% endblock %}
         </div>
@@ -57,6 +62,8 @@
     </nav>
 
   <!-- Page Content -->
+  {% if user.is_authenticated  %}
+  <title>Blog - Legendary Motorsport</title>
   <div class="container">
 
     <!-- Page Heading/Breadcrumbs -->
@@ -77,22 +84,31 @@
         </div>
         
         <!-- Blog Post -->
-        {% for auto in autos %}  
-        <div class="card mb-4">
-          <img class="card-img-top" src='media/{{ auto.imagen }}' alt="">
-          <div class="card-body">
-            <h2 class="card-title">{{ auto.nombre }}</h2>
-            <p class="card-text">{{ auto.descripcion }}</p>
-            <a href="{% url 'post' auto.id %}" class="btn btn-primary">Leer más &rarr;</a>
+      {% if cantidad == 0 %}
+      <div class='alert alert-danger'>
+          <button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>
+          <strong><h2 class="text-center" style="font-size: 60px;">Error - No hay vehiculos disponibles en el blog</h2></strong>    
+      </div>
+      {% else %}
+      {% for auto in autos %}  
+      <div class="card mb-4">
+        <img class="card-img-top" src='media/{{ auto.imagen }}' alt="">
+        <div class="card-body">
+          <h2 class="card-title">{{ auto.nombre }}</h2>
+          <p class="card-text">{{ auto.descripcion }}</p>  
+          <a href="{% url 'post' auto.id %}" class="btn btn-primary">Leer más &rarr;</a>
+          {% if user.is_staff %}
             <a href="{% url 'editpost' auto.id %}" class="btn btn-primary">Modificar post &rarr;</a>
             <a href="{% url 'deletepost' auto.id %}" class="btn btn-primary">Eliminar post &rarr;</a>
-          </div>
-          <div class="card-footer text-muted">
-            <b>Creado el</b> <i>{{auto.creado_en}}</i> | <b>Modificado el</b> <i>{{ auto.modificado_el }}</i>
-          </div>
+          {% endif %}
         </div>
-        <br>
-        {% endfor %}  
+        <div class="card-footer text-muted">
+          <b>Creado el</b> <i>{{auto.creado_en}}</i> por <i>{{auto.autor.username}}</i> | <b>Modificado el</b> <i>{{ auto.modificado_el }}</i>
+        </div>
+      </div>
+      <br>
+      {% endfor %}
+      {% endif %}
     </div>
     <!-- /.row -->
   </div>
@@ -107,7 +123,15 @@
     </div>
     <!-- /. Termino de container -->
   </footer>
-
+  {% else %}
+  <br>
+  <title>Error - Legendary Motorsport</title>
+  <div class='alert alert-danger'>
+      <button type='button' class='close' data-dismiss='alert' aria-hidden='true'></button>
+      <strong><h2 class="text-center" style="font-size: 60px;">Error - No tienes acceso a esta página</h2></strong>
+        <p class="m-0 text-center" style="font-size: 20px;">Para poder acceder a todo el contenido debes de <a href="accounts/login">iniciar sesión</a>.</p>
+  </div>
+  {% endif %}
   <!-- Bootstrap core JavaScript -->
   {% load static %}
   <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>

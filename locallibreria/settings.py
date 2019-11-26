@@ -27,25 +27,29 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_REDIRECT_URL = '/catalogo/inicio'
+LOGOUT_REDIRECT_URL = '/catalogo/accounts/salir'
 
 # Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
+    'django_userforeignkey',
     'django.contrib.contenttypes',
-    'django.contrib.sessions',
+    'django.contrib.sessions', #Administrador de sesiones
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'catalogo.apps.CatalogoConfig', #This object was created for us in /catalog/apps.py
+    'catalogo.apps.CatalogoConfig', #This object was created for us in /catalog/apps.py 
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware', #Administrador de sesiones
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django_userforeignkey.middleware.UserForeignKeyMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
